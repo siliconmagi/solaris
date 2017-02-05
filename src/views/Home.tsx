@@ -7,7 +7,7 @@ export default function(props) {
   return (
     <div className="page page__home">
     <Card>
-    <h1>Home</h1>
+    <h1>Live Home</h1>
     <p>Login here</p>
     <SignUpForm></SignUpForm>
     </Card>

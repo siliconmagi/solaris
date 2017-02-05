@@ -11,19 +11,36 @@ const config = {
   messagingSenderId: "1015163981984"
 };
 firebase.initializeApp(config);
+const auth = firebase.auth();
 
 // Observable Email
-const UserEmail = observable({
-  Name : 'email',
-  Value : ''
+const txtEmail = observable({
+  name : 'email',
+  value : ''
 });
 
 // Observable Password
-const UserPassword = observable({
-  Name : 'password',
-  Value : ''
+const txtPassword = observable({
+  name : 'password',
+  value : ''
 });
 
+//Register
+const registerEmailPass = function() {
+  const promise = auth.createUserWithEmailAndPassword(txtEmail.value, txtPassword.value);
+  promise.catch(e => console.log(e.message));
+}
 
-export { UserEmail, UserPassword };
+// Sign In
+// const email = txtEmail.value;
+// const pass = txtPassword.value;
+// const auth = firebase.auth();
+// const promise = auth.createUserWithEmailAndPassword(txtEmail, txtPassword);
+// promise.catch(e => console.log(e.message));
 
+// Sign In
+// const promise = auth.signInWithEmailAndPassword(txtEmail, txtPassword);
+// promise.catch(e => console.log(e.message));
+
+
+export { txtEmail, txtPassword, registerEmailPass };

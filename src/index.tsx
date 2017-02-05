@@ -5,12 +5,12 @@ import { Provider } from 'inferno-mobx';
 import { observable } from 'mobx';
 import { Router } from 'inferno-router';
 import views from './views';
-import { UserEmail, UserPassword } from './stores/Api';
+import { txtEmail, txtPassword, registerEmailPass } from './stores/Api';
 
 // We render our react app into this element
 const app = document.getElementById('app');
 const history = createHistory();
-const stores = { UserEmail, UserPassword };
+const stores = { txtEmail, txtPassword, registerEmailPass };
 
 const App = () => (
   <Provider {...stores}>

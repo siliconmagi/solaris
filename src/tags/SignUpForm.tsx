@@ -5,8 +5,9 @@ import { connect } from 'inferno-mobx';
 
 interface MyProps {
   store;
-  UserEmail;
-  UserPassword;
+  txtEmail;
+  txtPassword;
+  registerEmailPass();
 }
 interface MyState {}
 
@@ -15,32 +16,26 @@ interface MyState {}
 // 2) input username
 // 3) handle submit
 
-@connect(['UserEmail', 'UserPassword'])
+@connect(['txtEmail', 'txtPassword', 'registerEmailPass'])
 export default class Layout extends Component<MyProps, MyState> {
-  state = {
-    password: 'pass onInput',
-    email: 'email onInput',
-    message: 'hi',
 
-  }
-
-  handleSubmit = () => {
-    // console.log(this.props.UserEmail.Name)
+  handleSubmit = (e) => {
+    this.props.registerEmailPass()
+    // console.log('submit')
   }
   handleEmailChange = (e) => {
-    // console.log(this.props.UserEmail.Name)
-    this.props.UserEmail.Value = e.target.value
+    this.props.txtEmail.value = e.target.value
   }
   handlePasswordChange = (e) => {
-    this.props.UserPassword.Value = e.target.value
+    this.props.txtPassword.value = e.target.value
   }
-  render({ UserEmail, UserPassword }) {
+  render({ txtEmail, txtPassword }) {
     return (
       <div>
       <form onSubmit={this.handleSubmit}>
-      <div>{UserEmail.Value}{UserPassword.Value}</div>
-      <input type='text' placeholder= 'Enter Email' value={UserEmail.Value} onInput={this.handleEmailChange} />
-      <input type='password' placeholder='Password' value={UserPassword.Value} onInput={this.handlePasswordChange} />
+      <div>{txtEmail.value}{txtPassword.value}</div>
+      <input type='text' placeholder= 'Enter Email' value={txtEmail.value} onInput={this.handleEmailChange} />
+      <input type='password' placeholder='Password' value={txtPassword.value} onInput={this.handlePasswordChange} />
       <input type="submit"/>
       </form>
       </div>

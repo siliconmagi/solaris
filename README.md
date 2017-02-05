@@ -6,6 +6,8 @@
 ## Solaris Web App Project Foundation 
 A Front-End Web Application foundation using: Inferno JS, Mobx, Typescript, Styled-Components, Firebase and Webpack 2
 
+To download code:
+
 ```bash
 $ git clone https://github.com/siliconmagi/solaris 
 ```
@@ -23,6 +25,7 @@ To develop:
 $ yarn dev 
 
 To build for production:
+```
 
 ```bash
 $ yarn prod 
