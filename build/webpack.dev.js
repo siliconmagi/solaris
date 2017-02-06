@@ -59,13 +59,11 @@ module.exports = function (options) {
         bundles: {
           vendor: [
             'inferno',
-            'inferno-router',
             'inferno-component',
             'inferno-compat',
             'inferno-mobx',
             'styled-components',
-            'mobx',
-            'history'
+            'mobx'
           ]
         },
         dllDir: helpers.root('dll'),

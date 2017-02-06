@@ -1,5 +1,5 @@
 import Inferno from 'inferno';
-import { Link } from 'inferno-router';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Icon from '../tags/Icon';
 

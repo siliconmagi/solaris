@@ -23,13 +23,16 @@ To develop:
 
 ```bash
 $ yarn dev 
+```
 
 To build for production:
-```
 
 ```bash
 $ yarn prod 
 ```
-To Live Edit Code open in browser:
-http://localhost:3000/
 
+To Live Edit Code open in browser:
+
+```bash
+http://localhost:3000/
+```

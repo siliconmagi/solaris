@@ -1,5 +1,5 @@
 import Inferno from 'inferno';
-import { Link } from 'inferno-router';
+import { Link } from 'react-router-dom';
 import Card from '../tags/Card';
 import SignUpForm from '../tags/SignUpForm'
 

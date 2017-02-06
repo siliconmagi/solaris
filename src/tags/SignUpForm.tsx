@@ -20,8 +20,9 @@ interface MyState {}
 export default class Layout extends Component<MyProps, MyState> {
 
   handleSubmit = (e) => {
-    this.props.registerEmailPass()
-    // console.log('submit')
+    this.props.registerEmailPass();
+    e.preventDefault();
+    // console.log("hi");
   }
   handleEmailChange = (e) => {
     this.props.txtEmail.value = e.target.value

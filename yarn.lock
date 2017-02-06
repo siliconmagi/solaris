@@ -2340,14 +2340,6 @@ inferno-mobx@^1.2.2:
     inferno-create-element "1.2.2"
     mobx "*"
 
-inferno-router@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/inferno-router/-/inferno-router-1.2.2.tgz#68f8740c5d6df9731569a73e4b5fe19d28acfdfc"
-  dependencies:
-    inferno "1.2.2"
-    inferno-component "1.2.2"
-    inferno-create-element "1.2.2"
-
 inferno-transition-group@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/inferno-transition-group/-/inferno-transition-group-1.1.1.tgz#cf91eb574491da20dfbf0e558869a0c8a77d1ff1"
@@ -3868,7 +3860,7 @@ react-router-dom@next:
     history "^4.5.1"
     react-router "^4.0.0-beta.4"
 
-react-router@4.0.0-beta.4, react-router@^4.0.0-beta.4:
+react-router@^4.0.0-beta.4:
   version "4.0.0-beta.4"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.0.0-beta.4.tgz#6ab21755525ae3dfe7cca5e0176b05385a7b854d"
   dependencies:

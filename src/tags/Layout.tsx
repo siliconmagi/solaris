@@ -21,7 +21,6 @@ color: #ff8080;
 }
 `;
 
-
 export default class Layout extends Component<MyProps, MyState> {
   render({ children }) {
     return (

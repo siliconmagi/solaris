@@ -29,6 +29,7 @@ const txtPassword = observable({
 const registerEmailPass = function() {
   const promise = auth.createUserWithEmailAndPassword(txtEmail.value, txtPassword.value);
   promise.catch(e => console.log(e.message));
+  // console.log('hi there');
 }
 
 // Sign In
