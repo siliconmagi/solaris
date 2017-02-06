@@ -21,6 +21,7 @@ export default class Layout extends Component<MyProps, MyState> {
 
   handleSubmit = (e) => {
     this.props.registerEmailPass();
+    //Prevents page refresh
     e.preventDefault();
     // console.log("hi");
   }

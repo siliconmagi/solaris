@@ -2,8 +2,8 @@
 import Inferno from 'inferno';
 import { Provider } from 'inferno-mobx';
 import { observable } from 'mobx';
-import { HashRouter } from 'react-router-dom';
-import views from './views';
+import { HashRouter as Router } from 'react-router-dom';
+import Views from './views';
 import { txtEmail, txtPassword, registerEmailPass } from './stores/Api';
 
 // We render our react app into this element
@@ -12,12 +12,13 @@ const stores = { txtEmail, txtPassword, registerEmailPass };
 
 const App = () => (
   <Provider {...stores}>
-  <HashRouter>
-  {views}
-  </HashRouter>
+  <Router>
+  <Views/>
+  </Router>
   </Provider>
 )
 
+// Detect build environment for HMR
 if ('production' === process.env.ENV) {} else
   {
     const hmr: any = module;
@@ -27,4 +28,5 @@ if ('production' === process.env.ENV) {} else
     }
   }
 
+  // Mount root application
   Inferno.render(<App/>, app);
