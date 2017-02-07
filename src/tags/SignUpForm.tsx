@@ -16,14 +16,13 @@ interface MyState {}
 // 2) input username
 // 3) handle submit
 
-@connect(['txtEmail', 'txtPassword', 'registerEmailPass'])
+@connect(['txtEmail', 'txtPassword', 'registerEmailPass', 'errorMessage'])
 export default class Layout extends Component<MyProps, MyState> {
 
   handleSubmit = (e) => {
     this.props.registerEmailPass();
     //Prevents page refresh
     e.preventDefault();
-    // console.log("hi");
   }
   handleEmailChange = (e) => {
     this.props.txtEmail.value = e.target.value
@@ -31,15 +30,15 @@ export default class Layout extends Component<MyProps, MyState> {
   handlePasswordChange = (e) => {
     this.props.txtPassword.value = e.target.value
   }
-  render({ txtEmail, txtPassword }) {
+  render({ txtEmail, txtPassword, errorMessage }) {
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
-      <div>{txtEmail.value}{txtPassword.value}</div>
+      <form onSubmit={this.handleSubmit} >
       <input type='text' placeholder= 'Enter Email' value={txtEmail.value} onInput={this.handleEmailChange} />
       <input type='password' placeholder='Password' value={txtPassword.value} onInput={this.handlePasswordChange} />
-      <input type="submit"/>
+      <input type="submit" disabled={errorMessage.disabled} />
       </form>
+      <div>{errorMessage.value}</div>
       </div>
     );
   }

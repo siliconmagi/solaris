@@ -13,23 +13,38 @@ const config = {
 firebase.initializeApp(config);
 const auth = firebase.auth();
 
-// Observable Email
+// Text Email
 const txtEmail = observable({
   name : 'email',
   value : ''
 });
 
-// Observable Password
+// Text Password
 const txtPassword = observable({
   name : 'password',
   value : ''
 });
 
-//Register
-const registerEmailPass = function() {
+// Handle Error
+const handleError = (e) => {
+  errorMessage.value = e.message;
+  errorMessage.disabled = true;
+  setTimeout(function() {
+    errorMessage.value = '';
+    errorMessage.disabled = false;
+  }, 5000);
+}
+
+// Error Observable
+const errorMessage = observable({
+  value : '',
+  disabled: false
+});
+
+// Register Promise
+const registerEmailPass = () => {
   const promise = auth.createUserWithEmailAndPassword(txtEmail.value, txtPassword.value);
-  promise.catch(e => console.log(e.message));
-  // console.log('hi there');
+  promise.catch(e => handleError(e));
 }
 
 // Sign In
@@ -44,4 +59,4 @@ const registerEmailPass = function() {
 // promise.catch(e => console.log(e.message));
 
 
-export { txtEmail, txtPassword, registerEmailPass };
+export { txtEmail, txtPassword, registerEmailPass, errorMessage };

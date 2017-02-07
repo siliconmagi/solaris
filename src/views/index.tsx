@@ -17,6 +17,9 @@ body {
 h1 {
 margin: 0px;
 }
+ul {
+margin: 0px;
+}
 a {
   color: #ff8080;
 }

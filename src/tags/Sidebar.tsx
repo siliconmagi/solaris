@@ -1,10 +1,11 @@
 import { Route, Link, withRouter } from 'react-router-dom';
 import Routes from '../Routes';
 import styled from 'styled-components';
+import AuthButton from './AuthButton';
 
 // Sidebar Div
 const Sdiv = styled.div`
-padding: 10px;
+padding: 0px;
 width: 5em;
 `;
 
@@ -23,47 +24,22 @@ text-decoration: none;
 }
 `;
 
+const Sul = styled.ul`
+listStyleType: none;
+padding: 0;
+text-align: right;
+
+`;
+
 const Sidebar = () => (
   <Sdiv>
-  {Routes.map((route, index) => (
-    <Route
-    key={index}
-    path={route.path}
-    exact={route.exact}
-    component={route.sidebar}
-    />
-  ))}
-  <ul style={{ listStyleType: 'none', padding: 0 }}>
+  <Sul>
   <li><NLink to="/">Home</NLink></li>
-  <li><NLink to="/about">About</NLink></li>
   <li><NLink to="/blog">Blog</NLink></li>
-  </ul>
+  <li><NLink to="/about">About</NLink></li>
+  </Sul>
+  <AuthButton />
   </Sdiv>
 );
-
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
-  }
-};
-
-// Login status and logout button
-const AuthButton = withRouter(({ push }) => (
-  fakeAuth.isAuthenticated ? (
-    <p>
-    Welcome! <button onClick={() => {
-      fakeAuth.signout(() => push('/'))
-    }}>Sign out</button>
-    </p>
-  ) : (
-  <p>You are not logged in.</p>
-  )
-));
 
 export default Sidebar

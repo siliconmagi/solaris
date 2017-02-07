@@ -69,6 +69,7 @@
 		"inferno-devtools": "^1.2.2",
 		"inferno-mobx": "^1.2.2",
 		"junctions": "^0.3.0",
+		"lodash": "^4.17.4",
 		"mobx": "^3.0.2",
 		"react-junctions": "^0.3.3",
 		"react-motion": "^0.4.7",
