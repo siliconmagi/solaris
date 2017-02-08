@@ -28,6 +28,10 @@ const txtPassword = observable({
 // Handle Error
 const handleError = (e) => {
   errorMessage.value = e.message;
+  resetError();
+}
+
+const resetError = () => {
   errorMessage.disabled = true;
   setTimeout(function() {
     errorMessage.value = '';
@@ -51,11 +55,7 @@ const emailSignUp = () => {
 const login = () => {
   if (isLoggedIn.value) {
     errorMessage.value = 'Already logged in!';
-    errorMessage.disabled = true;
-    setTimeout(function() {
-      errorMessage.value = '';
-      errorMessage.disabled = false;
-    }, 3000);
+    resetError();
   } else {
     const promise = auth.signInWithEmailAndPassword(txtEmail.value, txtPassword.value);
     promise.catch(e => handleError(e));
