@@ -27,12 +27,11 @@ a {
 
 // Root Div
 const Rdiv = styled.div`
-display: flex;
+
 `;
 
 // Main Div
 const Mdiv = styled.div`
-flex: 1;
 `;
 
 const View = () => (

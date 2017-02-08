@@ -3,12 +3,6 @@ import Routes from '../Routes';
 import styled from 'styled-components';
 import AuthButton from './AuthButton';
 
-// Sidebar Div
-const Sdiv = styled.div`
-padding: 0px;
-width: 5em;
-`;
-
 // Navbar Links
 const NLink = styled(Link)`
 background: #b30047;
@@ -17,7 +11,6 @@ margin: 0 .25em 0 0;
 font-size: 1.3em;
 border-radius: 3px;
 color: white;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 text-decoration: none;
 &:hover {
   background: #cc3399;
@@ -26,20 +19,29 @@ text-decoration: none;
 
 const Sul = styled.ul`
 listStyleType: none;
-padding: 0;
-text-align: right;
+display: flex;
+flex-flow: row wrap;
+align-items: center;
+justify-content: center;
+margin: 0px;
+padding: 0px;
+`;
 
+const Simg = styled.img`
+height: 23.33px;
+background: black;
+margin: 0 .5em 0 .5em;
+padding: 0 .25em 0 .25em;
+border-radius: 3px;
 `;
 
 const Sidebar = () => (
-  <Sdiv>
   <Sul>
+  <Simg src="https://cdn.rawgit.com/siliconmagi/pictures/master/atar.svg" />
   <li><NLink to="/">Home</NLink></li>
   <li><NLink to="/blog">Blog</NLink></li>
   <li><NLink to="/about">About</NLink></li>
   </Sul>
-  <AuthButton />
-  </Sdiv>
 );
 
 export default Sidebar

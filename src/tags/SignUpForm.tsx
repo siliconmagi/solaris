@@ -7,7 +7,10 @@ interface MyProps {
   store;
   txtEmail;
   txtPassword;
-  registerEmailPass();
+  emailSignUp();
+  login();
+  logout();
+  isLoggedIn;
 }
 interface MyState {}
 
@@ -16,12 +19,20 @@ interface MyState {}
 // 2) input username
 // 3) handle submit
 
-@connect(['txtEmail', 'txtPassword', 'registerEmailPass', 'errorMessage'])
+@connect(['txtEmail', 'txtPassword', 'emailSignUp', 'login', 'logout', 'isLoggedIn', 'errorMessage'])
 export default class Layout extends Component<MyProps, MyState> {
 
-  handleSubmit = (e) => {
-    this.props.registerEmailPass();
+  handleLogin = (e) => {
+    this.props.login();
     //Prevents page refresh
+    e.preventDefault();
+  }
+  handleSignUp = (e) => {
+    this.props.emailSignUp();
+    e.preventDefault();
+  }
+  handleLogout = (e) => {
+    this.props.logout();
     e.preventDefault();
   }
   handleEmailChange = (e) => {
@@ -30,14 +41,16 @@ export default class Layout extends Component<MyProps, MyState> {
   handlePasswordChange = (e) => {
     this.props.txtPassword.value = e.target.value
   }
-  render({ txtEmail, txtPassword, errorMessage }) {
+  render({ txtEmail, txtPassword, errorMessage, isLoggedIn }) {
     return (
       <div>
-      <form onSubmit={this.handleSubmit} >
-      <input type='text' placeholder= 'Enter Email' value={txtEmail.value} onInput={this.handleEmailChange} />
+      <input type='text' placeholder= 'Email' value={txtEmail.value} onInput={this.handleEmailChange} />
       <input type='password' placeholder='Password' value={txtPassword.value} onInput={this.handlePasswordChange} />
-      <input type="submit" disabled={errorMessage.disabled} />
-      </form>
+      <br/>
+      <button onClick={this.handleLogin} disabled={errorMessage.disabled}>Login</button>
+      <button onClick={this.handleSignUp} disabled={errorMessage.disabled}>Sign up</button>
+      { isLoggedIn.value ? <button onClick={this.handleLogout} disabled={errorMessage.disabled}>Logout</button> : null }
+      <div>{isLoggedIn.value.toString()}</div>
       <div>{errorMessage.value}</div>
       </div>
     );

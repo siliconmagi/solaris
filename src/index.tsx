@@ -4,11 +4,11 @@ import { Provider } from 'inferno-mobx';
 import { observable } from 'mobx';
 import { HashRouter as Router } from 'react-router-dom';
 import Views from './views';
-import { txtEmail, txtPassword, registerEmailPass, errorMessage } from './stores/Api';
+import { txtEmail, txtPassword, emailSignUp, login, logout, isLoggedIn, errorMessage } from './stores/Api';
 
 // We render our react app into this element
 const app = document.getElementById('app');
-const stores = { txtEmail, txtPassword, registerEmailPass, errorMessage };
+const stores = { txtEmail, txtPassword, emailSignUp, login, logout, isLoggedIn, errorMessage };
 
 const App = () => (
   <Provider {...stores}>

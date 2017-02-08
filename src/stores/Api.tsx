@@ -32,31 +32,52 @@ const handleError = (e) => {
   setTimeout(function() {
     errorMessage.value = '';
     errorMessage.disabled = false;
-  }, 5000);
+  }, 3000);
 }
 
-// Error Observable
+// Error Object
 const errorMessage = observable({
   value : '',
   disabled: false
 });
 
-// Register Promise
-const registerEmailPass = () => {
+// Email Sign up
+const emailSignUp = () => {
   const promise = auth.createUserWithEmailAndPassword(txtEmail.value, txtPassword.value);
   promise.catch(e => handleError(e));
 }
 
-// Sign In
-// const email = txtEmail.value;
-// const pass = txtPassword.value;
-// const auth = firebase.auth();
-// const promise = auth.createUserWithEmailAndPassword(txtEmail, txtPassword);
-// promise.catch(e => console.log(e.message));
+// Login
+const login = () => {
+  if (isLoggedIn.value) {
+    errorMessage.value = 'Already logged in!';
+    errorMessage.disabled = true;
+    setTimeout(function() {
+      errorMessage.value = '';
+      errorMessage.disabled = false;
+    }, 3000);
+  } else {
+    const promise = auth.signInWithEmailAndPassword(txtEmail.value, txtPassword.value);
+    promise.catch(e => handleError(e));
+  }
+}
 
-// Sign In
-// const promise = auth.signInWithEmailAndPassword(txtEmail, txtPassword);
-// promise.catch(e => console.log(e.message));
+const isLoggedIn = observable({
+  value: false
+});
 
+// Logout
+const logout = () => {
+  firebase.auth().signOut();
+}
 
-export { txtEmail, txtPassword, registerEmailPass, errorMessage };
+// Auth listener
+firebase.auth().onAuthStateChanged(firebaseUser => {
+  if(firebaseUser) {
+    isLoggedIn.value = true;
+  } else {
+    isLoggedIn.value = false;
+  }
+})
+
+export { txtEmail, txtPassword, emailSignUp, login, logout, isLoggedIn, errorMessage };
