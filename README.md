@@ -4,7 +4,7 @@
 <br />
 
 ## Solaris Web App Project Foundation 
-A Front-End Web Application foundation using: Inferno JS, Mobx, Typescript, Styled-Components, Firebase and Webpack 2
+A Full Stack Web Application foundation using: Inferno JS, Mobx, Typescript, Styled-Components, Firebase and Webpack 2
 
 To download code:
 
