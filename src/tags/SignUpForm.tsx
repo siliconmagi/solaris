@@ -44,13 +44,12 @@ export default class Layout extends Component<MyProps, MyState> {
   render({ txtEmail, txtPassword, errorMessage, isLoggedIn }) {
     return (
       <div>
-      <input type='text' placeholder= 'Email' value={txtEmail.value} onInput={this.handleEmailChange} />
-      <input type='password' placeholder='Password' value={txtPassword.value} onInput={this.handlePasswordChange} />
+      { isLoggedIn.value ? null : <input type='text' placeholder= 'Email' value={txtEmail.value} onInput={this.handleEmailChange} /> }
+      { isLoggedIn.value ? null : <input type='password' placeholder='Password' value={txtPassword.value} onInput={this.handlePasswordChange} /> }
       <br/>
-      <button onClick={this.handleLogin} disabled={errorMessage.disabled}>Login</button>
-      <button onClick={this.handleSignUp} disabled={errorMessage.disabled}>Sign up</button>
+      { isLoggedIn.value ? null : <button onClick={this.handleLogin} disabled={errorMessage.disabled}>Login</button> }
+      { isLoggedIn.value ? null : <button onClick={this.handleSignUp} disabled={errorMessage.disabled}>Sign up</button> }
       { isLoggedIn.value ? <button onClick={this.handleLogout} disabled={errorMessage.disabled}>Logout</button> : null }
-      <div>{isLoggedIn.value.toString()}</div>
       <div>{errorMessage.value}</div>
       </div>
     );

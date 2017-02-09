@@ -37,6 +37,8 @@ const resetError = () => {
     errorMessage.value = '';
     errorMessage.disabled = false;
   }, 3000);
+  txtEmail.value = '';
+  txtPassword.value = '';
 }
 
 // Error Object
@@ -49,17 +51,14 @@ const errorMessage = observable({
 const emailSignUp = () => {
   const promise = auth.createUserWithEmailAndPassword(txtEmail.value, txtPassword.value);
   promise.catch(e => handleError(e));
+  resetError();
 }
 
 // Login
 const login = () => {
-  if (isLoggedIn.value) {
-    errorMessage.value = 'Already logged in!';
-    resetError();
-  } else {
-    const promise = auth.signInWithEmailAndPassword(txtEmail.value, txtPassword.value);
-    promise.catch(e => handleError(e));
-  }
+  const promise = auth.signInWithEmailAndPassword(txtEmail.value, txtPassword.value);
+  promise.catch(e => handleError(e));
+  resetError();
 }
 
 const isLoggedIn = observable({
