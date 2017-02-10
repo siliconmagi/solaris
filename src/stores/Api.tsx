@@ -1,82 +1,93 @@
 import { observable } from 'mobx';
-// import appConfig from '../config';
-import * as firebase from "firebase";
+import {
+  CognitoUser, CognitoUserAttribute,
+  CognitoUserPool
+} from 'amazon-cognito-identity-js';
+import { CognitoIdentityCredentials, Config } from 'aws-sdk';
+import appConfig from '../config';
 
-// initialize Firebase
-const config = {
-  apiKey: "AIzaSyAq8yCB1vZHYksZ49YBfhPnHkpDpLXXDsw",
-  authDomain: "nightshell-4158f.firebaseapp.com",
-  databaseURL: "https://nightshell-4158f.firebaseio.com",
-  storageBucket: "nightshell-4158f.appspot.com",
-  messagingSenderId: "1015163981984"
-};
-firebase.initializeApp(config);
-const auth = firebase.auth();
+// Observable fields
+const txtUserName = observable({
+  Name : 'user name',
+  Value : ''
+});
 
-// Text Email
 const txtEmail = observable({
-  name : 'email',
-  value : ''
+  Name : 'email',
+  Value : ''
 });
 
-// Text Password
 const txtPassword = observable({
-  name : 'password',
-  value : ''
+  Name : 'password',
+  Value : ''
 });
+
+// Setup userPool
+const poolData = {
+  UserPoolId : appConfig.UserPoolId,
+  ClientId : appConfig.ClientId
+}
+
+const userPool = new CognitoUserPool(poolData);
+
+// Setup Attributes
+const attributeList = [];
+const attributeEmail = new CognitoUserAttribute(txtEmail);
+attributeList.push(attributeEmail);
+
+// Userpool Signup
+
 
 // Handle Error
-const handleError = (e) => {
-  errorMessage.value = e.message;
+const handleError = (err) => {
+  errorMessage.Value = err.message;
   resetError();
 }
 
 const resetError = () => {
   errorMessage.disabled = true;
   setTimeout(function() {
-    errorMessage.value = '';
+    errorMessage.Value = '';
     errorMessage.disabled = false;
-  }, 3000);
-  txtEmail.value = '';
-  txtPassword.value = '';
+  }, 5000);
+  txtUserName.Value = '';
+  txtEmail.Value = '';
+  txtPassword.Value = '';
 }
 
 // Error Object
 const errorMessage = observable({
-  value : '',
+  Value : '',
   disabled: false
+});
+
+// Check logged in
+const isLoggedIn = observable({
+  Value: false
 });
 
 // Email Sign up
 const emailSignUp = () => {
-  const promise = auth.createUserWithEmailAndPassword(txtEmail.value, txtPassword.value);
-  promise.catch(e => handleError(e));
+  userPool.signUp(txtUserName.Value, txtPassword.Value, attributeList, null, function(err, result){
+    if (err) {
+      handleError(err);
+      return;
+    }
+    const cognitoUser = result.user;
+    console.log('user name is ' + cognitoUser.getUsername());
+  });
   resetError();
 }
 
 // Login
 const login = () => {
-  const promise = auth.signInWithEmailAndPassword(txtEmail.value, txtPassword.value);
-  promise.catch(e => handleError(e));
+  console.log('login')
   resetError();
 }
 
-const isLoggedIn = observable({
-  value: false
-});
-
 // Logout
 const logout = () => {
-  firebase.auth().signOut();
+  console.log('logout')
 }
 
-// Auth listener
-firebase.auth().onAuthStateChanged(firebaseUser => {
-  if(firebaseUser) {
-    isLoggedIn.value = true;
-  } else {
-    isLoggedIn.value = false;
-  }
-})
-
-export { txtEmail, txtPassword, emailSignUp, login, logout, isLoggedIn, errorMessage };
+export { txtUserName, txtEmail, txtPassword, emailSignUp, login, logout, isLoggedIn, errorMessage };
